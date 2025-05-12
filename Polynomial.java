@@ -20,35 +20,25 @@ public class Polynomial{
 		// check which is longer
 		if(this.coefficients.length<=second.coefficients.length){
 			Polynomial result = new Polynomial(second.coefficients);
-			//result.coefficients = new double[second.coefficients.length];
+			
 			int i;
 			for(i=0;i<this.coefficients.length;i++){
 				result.coefficients[i]= result.coefficients[i]+this.coefficients[i];
 				
 			}
 			return result;
-			/*
-			while(i<second.coefficients.length){
-				result.coefficients[i]=second.coefficients[i];
-				i++;
-			}
-			*/
+			
 		}
 		else{
 			Polynomial result = new Polynomial(this.coefficients);
 			int i;
-			//result.coefficients = new double[this.coefficients.length];
+			
 			for(i=0;i<second.coefficients.length;i++){
 				result.coefficients[i]= result.coefficients[i]+second.coefficients[i];
 				
 			}
 			return result;
-			/*
-			while(i<this.coefficients.length){
-				result.coefficients[i]=this.coefficients[i];
-				i++;
-			}
-			*/
+			
 		}
 		
 
