@@ -1,6 +1,8 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.FileWriter; // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
 
 
 public class Polynomial{
@@ -34,14 +36,18 @@ public class Polynomial{
         	Scanner scanner = new Scanner(file);
         	data = scanner.nextLine();
         	System.out.println(data);
+		int first_char=0;
+		if(data.charAt(0)=='-')
+			first_char=1;
 		String[] separated_terms = data.split("[-\\+]");
 		System.out.println(separated_terms.length);
-		this.coefficients = new double [separated_terms.length];
-		this.exponents = new int [separated_terms.length];
+		this.coefficients = new double [separated_terms.length-first_char];
+		this.exponents = new int [separated_terms.length-first_char];
 		int index=0;
 		String[] terms = data.split("[+]");
 		for(int i=0;i<terms.length;i++){
 		if(terms[i].indexOf('-')!=-1){
+			
 			String[] more_terms = terms[i].split("[-]");
 			System.out.println("adding minus");
 			// adding the negative signs 
@@ -50,8 +56,8 @@ public class Polynomial{
 				System.out.println(more_terms[j]+"\n");
 			}
 			// adding values to the arrays
-			for(int k=0;k<more_terms.length;k++){
-				if(more_terms[k].length()==1){
+			for(int k=first_char;k<more_terms.length;k++){
+				if(more_terms[k].length()==1 || more_terms[k].length()==2){
 					this.coefficients[index]=Double.parseDouble(more_terms[k]);
 					this.exponents[index]=0;
 					index++;
@@ -84,11 +90,7 @@ public class Polynomial{
 		System.out.println(terms[i]);
 
 		}
-		//System.out.println("checking");
-		//for( int m=0; m<this.coefficients.length;m++){
-			//System.out.println(this.coefficients[m]+"x"+this.exponents[m]+"\n");
-
-		//}
+		
       	scanner.close();
     	} catch (FileNotFoundException e) {
       	System.out.println("An error occurred.");
@@ -121,8 +123,8 @@ public class Polynomial{
 				largest_exponent = largest(second.exponents);
 		else
 			largest_exponent = largest(this.exponents);
-		double [] intial_coefficients = new double[largest_exponent];
-		int [] intial_exponents = new int[largest_exponent];
+		double [] intial_coefficients = new double[largest_exponent+1];
+		int [] intial_exponents = new int[largest_exponent+1];
 
 		// check which is longer
 		
@@ -145,7 +147,7 @@ public class Polynomial{
 			}
 			
 			
-			while(i<largest_exponent && index_in_second<second.exponents.length){
+			while(i<largest_exponent+1 && index_in_second<second.exponents.length){
 				int already = 0;
 				for( int m = 0; m<i;m++){
 					if ( second.exponents[index_in_second] == intial_exponents[m]){
@@ -163,8 +165,8 @@ public class Polynomial{
 					index_in_second++;
 
 			}
-			
-			if(i<largest_exponent){
+			//System.out.println("i="+i);
+			if(i<largest_exponent+1){
 				double [] final_coefficients = new double [i];
 				int [] final_exponents = new int [i];
 				
@@ -192,8 +194,8 @@ public class Polynomial{
 				largest_exponent = largest(this.exponents);
 
 			
-			intial_coefficients = new double[largest_exponent];
-			intial_exponents = new int[largest_exponent];
+			intial_coefficients = new double[largest_exponent+1];
+			intial_exponents = new int[largest_exponent+1];
 			i =0 ; j=0;
 			int index_in_this;
 			index_in_this =0;
@@ -214,7 +216,7 @@ public class Polynomial{
 				}
 			}
 			
-			while(i<largest_exponent && index_in_this<second.exponents.length){
+			while(i<largest_exponent+1 && index_in_this<this.exponents.length){
 				int already = 0;
 				for( int m = 0; m<i;m++){
 					if ( this.exponents[index_in_this] == intial_exponents[m]){
@@ -232,7 +234,8 @@ public class Polynomial{
 					index_in_this++;
 
 			}
-			if(i<largest_exponent){
+			//System.out.println("i="+i);
+			if(i<largest_exponent+1){
 				double [] final_coefficients = new double [i];
 				int [] final_exponents = new int [i];
 				
@@ -297,7 +300,32 @@ public class Polynomial{
 
 	}
 
+	public void saveToFile(String file_name){
+		try {
+      		FileWriter writer = new FileWriter(file_name);
+      		for(int i=0; i<this.coefficients.length;i++){
+			if(this.exponents[i]==0)
+				writer.write(String.valueOf(this.coefficients[i]));
+			else{
+				if(this.coefficients[i]>0){
+					writer.write("+"+String.valueOf(this.coefficients[i])+"x"+this.exponents[i]);
 
+				}
+				else{
+					writer.write(String.valueOf(this.coefficients[i])+"x"+this.exponents[i]);
+				}
+
+			}
+
+		}
+     		writer.close();
+    	} catch (IOException e) {
+      		System.out.println("An error occurred.");
+      		e.printStackTrace();
+    		}
+    	}
+
+	
 
 
 }

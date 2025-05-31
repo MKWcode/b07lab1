@@ -15,11 +15,11 @@ public class Driver {
 		System.out.println("cs = "+s.coefficients[i]+" es= "+s.exponents[i]);
 	}
 	System.out.println("\n");
-	double [] c3 = {6,5}; 
-	int [] e3 = {0,3};
+	double [] c3 = {2,-1}; 
+	int [] e3 = {1,0};
 	Polynomial p3 = new Polynomial(c3,e3); 
-	double [] c4 = {-2,-9}; 
-	int [] e4 = {1,4};
+	double [] c4 = {1,4}; 
+	int [] e4 = {1,0};
 	Polynomial p4 = new Polynomial(c4,e4);
 	Polynomial q = p3.multiply(p4);
 	for( int i=0;i<q.coefficients.length;i++){
@@ -32,6 +32,9 @@ public class Driver {
 	for( int i=0;i<n.coefficients.length;i++){
 		System.out.println("cs = "+n.coefficients[i]+" es= "+n.exponents[i]);
 	}
+	// writing to a file
+	p2.saveToFile("Expressions.txt");
+
 	/*
 	Polynomial p = new Polynomial();
 	System.out.println(p.evaluate(3)); 
