@@ -4,8 +4,8 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 
 public class Polynomial{
-	double [] coefficients;
-	int [] exponents;
+	public double [] coefficients;
+	public int [] exponents;
 
 	public Polynomial(){
 		coefficients = new double[1];
@@ -68,20 +68,27 @@ public class Polynomial{
 
 		}
 		else{
-			String[] numbers = terms[i].split("x");
-			this.coefficients[index]=Double.parseDouble(numbers[0]);
-			this.exponents[index]= Integer.parseInt(numbers[1]);
-			index++;
+			if( terms[i].length()==1){
+				this.coefficients[index]=Double.parseDouble(terms[i]);
+				this.exponents[index]=0;
+				index++;
+			}
+			else{
+				String[] numbers = terms[i].split("x");
+				this.coefficients[index]=Double.parseDouble(numbers[0]);
+				this.exponents[index]= Integer.parseInt(numbers[1]);
+				index++;
+			}
 
 		}
 		System.out.println(terms[i]);
 
 		}
-		System.out.println("checking");
-		for( int m=0; m<this.coefficients.length;m++){
-			System.out.println(this.coefficients[m]+"x"+this.exponents[m]+"\n");
+		//System.out.println("checking");
+		//for( int m=0; m<this.coefficients.length;m++){
+			//System.out.println(this.coefficients[m]+"x"+this.exponents[m]+"\n");
 
-		}
+		//}
       	scanner.close();
     	} catch (FileNotFoundException e) {
       	System.out.println("An error occurred.");

@@ -1,3 +1,4 @@
+import java.io.File;  // Import the File class
 public class Driver { 
 	
 	public static void main(String [] args) { 
@@ -25,7 +26,12 @@ public class Driver {
 		System.out.println("cs = "+q.coefficients[i]+" es= "+q.exponents[i]);
 	}
 
-	
+	//opening a file
+	File myFile = new File("test_file.txt");
+	Polynomial n = new Polynomial(myFile);
+	for( int i=0;i<n.coefficients.length;i++){
+		System.out.println("cs = "+n.coefficients[i]+" es= "+n.exponents[i]);
+	}
 	/*
 	Polynomial p = new Polynomial();
 	System.out.println(p.evaluate(3)); 
