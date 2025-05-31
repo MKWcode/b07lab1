@@ -305,10 +305,18 @@ public class Polynomial{
       		FileWriter writer = new FileWriter(file_name);
       		for(int i=0; i<this.coefficients.length;i++){
 			if(this.exponents[i]==0)
-				writer.write(String.valueOf(this.coefficients[i]));
+				if(i!=0)
+					writer.write("+"+String.valueOf(this.coefficients[i]));
+				else
+					writer.write(String.valueOf(this.coefficients[i]));
 			else{
 				if(this.coefficients[i]>0){
-					writer.write("+"+String.valueOf(this.coefficients[i])+"x"+this.exponents[i]);
+					if(i==0){
+						writer.write(String.valueOf(this.coefficients[i])+"x"+this.exponents[i]);
+					}
+					else{
+						writer.write("+"+String.valueOf(this.coefficients[i])+"x"+this.exponents[i]);
+					}
 
 				}
 				else{
