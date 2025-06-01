@@ -15,17 +15,17 @@ public class Driver {
 		System.out.println("cs = "+s.coefficients[i]+" es= "+s.exponents[i]);
 	}
 	System.out.println("\n");
-	double [] c3 = {2,-1}; 
+	double [] c3 = {5,3}; 
 	int [] e3 = {1,0};
 	Polynomial p3 = new Polynomial(c3,e3); 
-	double [] c4 = {1,4}; 
-	int [] e4 = {1,0};
+	double [] c4 = {1,-1,4}; 
+	int [] e4 = {2,1,0};
 	Polynomial p4 = new Polynomial(c4,e4);
 	Polynomial q = p3.multiply(p4);
 	for( int i=0;i<q.coefficients.length;i++){
 		System.out.println("cs = "+q.coefficients[i]+" es= "+q.exponents[i]);
 	}
-
+	System.out.println("reading in from file");
 	//opening a file
 	File myFile = new File("test_file.txt");
 	Polynomial n = new Polynomial(myFile);

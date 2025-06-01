@@ -35,12 +35,12 @@ public class Polynomial{
 		try {
         	Scanner scanner = new Scanner(file);
         	data = scanner.nextLine();
-        	System.out.println(data);
+        	
 		int first_char=0;
 		if(data.charAt(0)=='-')
 			first_char=1;
 		String[] separated_terms = data.split("[-\\+]");
-		System.out.println(separated_terms.length);
+		
 		this.coefficients = new double [separated_terms.length-first_char];
 		this.exponents = new int [separated_terms.length-first_char];
 		int index=0;
@@ -48,12 +48,16 @@ public class Polynomial{
 		for(int i=0;i<terms.length;i++){
 		if(terms[i].indexOf('-')!=-1){
 			
+			if(terms[i].charAt(0)=='-')
+				first_char=1;
+			else
+				first_char =0;
 			String[] more_terms = terms[i].split("[-]");
-			System.out.println("adding minus");
+			
 			// adding the negative signs 
 			for(int j=1;j<more_terms.length;j++){
 				more_terms[j] = "-"+more_terms[j];
-				System.out.println(more_terms[j]+"\n");
+				
 			}
 			// adding values to the arrays
 			for(int k=first_char;k<more_terms.length;k++){
@@ -87,7 +91,7 @@ public class Polynomial{
 			}
 
 		}
-		System.out.println(terms[i]);
+		
 
 		}
 		
